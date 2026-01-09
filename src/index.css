@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #F17A16;
+  --color-off-white: #F6F6F6;
+  --color-dark: #111111;
+
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui;
+  --font-heading: "Syne", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply font-sans bg-off-white text-dark antialiased overflow-x-hidden;
+  }
+
+ 
+  h1, h2, h3, h4 {
+    @apply font-heading tracking-tighter uppercase font-extrabold;
+  }
+
+  ::selection {
+    @apply bg-brand text-white;
+  }
+}
+
+@layer utilities {
+  .text-outline {
+    -webkit-text-stroke: 1px currentColor;
+    color: transparent;
+  }
+
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+  }
+
+  .marquee-wrapper {
+    @apply flex overflow-hidden select-none gap-16;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+
+  .marquee-content {
+    @apply flex shrink-0 justify-around min-w-full gap-16;
+    animation: scroll 40s linear infinite;
+  }
+
+  .marquee-wrapper:hover .marquee-content {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-off-white;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-dark;
+  border: 2px solid var(--color-off-white);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-brand;
+}
